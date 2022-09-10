@@ -1,9 +1,9 @@
 /*************************************
-* Lab 1 Exercise 3
-* Name:
-* Student No:
-* Lab Group:
-*************************************/
+ * Lab 1 Exercise 3
+ * Name: Koh Zheng Qiang Shawn
+ * Student No: A0185892L
+ * Lab Group:
+ *************************************/
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -27,10 +27,10 @@
 #define LIST_LEN 6
 #define MAP 7
 
-
-
-int main(int argc, char *argv[]) {
-    if (argc != 2) {
+int main(int argc, char *argv[])
+{
+    if (argc != 2)
+    {
         fprintf(stderr, "Error: expecting 1 argument, %d found\n", argc - 1);
         exit(1);
     }
@@ -42,9 +42,51 @@ int main(int argc, char *argv[]) {
     // (You may leave the function empty if you do not need it)
     update_functions();
 
-    
     // Rest of code logic here
-    
+    FILE *p_file;
+    char *p_line = NULL;
+    size_t len = 0;
+    ssize_t read;
+
+    p_file = fopen(argv[1], "r");
+    if (p_file == NULL)
+        exit(EXIT_FAILURE);
+
+    while ((read = getline(&p_line, &len, p_file)) != -1)
+    {
+        printf("%s", p_line);
+    }
+
+    fclose(p_file);
+    free(p_line);
+
+    exit(EXIT_SUCCESS);
 }
 
-
+// Takes an instruction enum and runs the corresponding function
+// We assume input always has the right format (no input validation on runner)
+// void run_instruction(list *lst, int instr)
+// {
+//     int index, data, element;
+//     switch (instr)
+//     {
+//     case INSERT_AT:
+//         scanf("%d %d", &index, &data);
+//         insert_node_at(lst, index, data);
+//         break;
+//     case DELETE_AT:
+//         scanf("%d", &index);
+//         delete_node_at(lst, index);
+//         break;
+//     case SEARCH_LIST:
+//         scanf("%d", &element);
+//         int ind = search_list(lst, element);
+//         print_index(ind);
+//         break;
+//     case REVERSE_LIST:
+//         reverse_list(lst);
+//         break;
+//     case RESET_LIST:
+//         reset_list(lst);
+//     }
+// }
