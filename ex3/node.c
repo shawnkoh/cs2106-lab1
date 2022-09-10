@@ -32,6 +32,14 @@ long sum_list(list *lst)
 // Traverses list and returns the number of data values in the list.
 int list_len(list *lst)
 {
+    long count = 0;
+    node *p_node = lst->head;
+    while (p_node != NULL)
+    {
+        count++;
+        p_node = p_node->next;
+    }
+    return count;
 }
 
 // Inserts a new node with data value at index (counting from head
@@ -39,31 +47,139 @@ int list_len(list *lst)
 // Note: index is guaranteed to be valid.
 void insert_node_at(list *lst, int index, int data)
 {
+    node *p_new_node = malloc(sizeof(node));
+    p_new_node->data = data;
+
+    if (lst->head == NULL)
+    {
+        lst->head = p_new_node;
+        return;
+    }
+
+    if (index == 0)
+    {
+        p_new_node->next = lst->head;
+        lst->head = p_new_node;
+        return;
+    }
+
+    int search_index = 1;
+    node *p_node = lst->head;
+    while (search_index < index)
+    {
+        p_node = p_node->next;
+        search_index++;
+    }
+
+    if (p_node->next != NULL)
+    {
+        p_new_node->next = p_node->next;
+    }
+    p_node->next = p_new_node;
 }
 
 // Deletes node at index (counting from head starting from 0).
 // Note: index is guarenteed to be valid.
-
 void delete_node_at(list *lst, int index)
 {
+    if (lst->head == NULL)
+    {
+        return;
+    }
+
+    if (index == 0)
+    {
+        if (lst->head->next == NULL)
+        {
+            free(lst->head);
+            lst->head = NULL;
+            return;
+        }
+        lst->head = lst->head->next;
+        return;
+    }
+
+    int search_index = 1;
+    node *p_node = lst->head;
+    while (search_index < index)
+    {
+        p_node = p_node->next;
+        search_index++;
+    }
+
+    if (p_node->next == NULL)
+    {
+        return;
+    }
+
+    node *p_node_to_delete = p_node->next;
+
+    if (p_node_to_delete->next == NULL)
+    {
+        p_node->next = NULL;
+        free(p_node_to_delete);
+        return;
+    }
+
+    p_node->next = p_node_to_delete->next;
+    free(p_node_to_delete);
 }
 
 // Search list by the given element.
 // If element not present, return -1 else return the index. If lst is empty return -2.
-
+// Printing of the index is already handled in ex2.c
 int search_list(list *lst, int element)
 {
+    if (lst->head == NULL)
+    {
+        return -2;
+    }
+
+    int index = 0;
+    node *p_node = lst->head;
+
+    while (p_node->next != NULL)
+    {
+        if (p_node->data == element)
+        {
+            return index;
+        }
+        index += 1;
+        p_node = p_node->next;
+    }
+    return -1;
 }
 
 // Reverses the list with the last node becoming the first node.
 void reverse_list(list *lst)
 {
+    node *p_previous = NULL;
+    node *p_current = lst->head;
+    node *p_next = NULL;
+
+    while (p_current != NULL)
+    {
+        p_next = p_current->next;
+        p_current->next = p_previous;
+        p_previous = p_current;
+        p_current = p_next;
+    }
+    lst->head = p_previous;
 }
 
 // Resets list to an empty state (no nodes) and frees
 // any allocated memory in the process
 void reset_list(list *lst)
 {
+    node *p_node = lst->head;
+
+    while (p_node != NULL)
+    {
+        node *p_next = p_node->next;
+        free(p_node);
+        p_node = p_next;
+    }
+    lst->head = NULL;
 }
 
 // Traverses list and applies func on data values of
