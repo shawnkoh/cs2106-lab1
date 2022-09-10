@@ -5,6 +5,7 @@
  * Lab Group:
  *************************************/
 
+#include "stddef.h"
 #include "node.h"
 
 // Add in your implementation below to the respective functions
@@ -15,12 +16,67 @@
 // Note: index is guaranteed to be valid.
 void insert_node_at(list *lst, int index, int data)
 {
+    node *p_new_node = (node *)malloc(sizeof(node));
+    p_new_node->data = data;
+
+    if (lst->head == NULL)
+    {
+        lst->head = p_new_node;
+        return;
+    }
+
+    if (index == 0)
+    {
+        p_new_node->next = lst->head;
+        lst->head = p_new_node;
+        return;
+    }
+
+    int search_index = 1;
+    node *p_node = lst->head;
+    while (search_index < index)
+    {
+        p_node = p_node->next;
+        search_index++;
+    }
+
+    if (p_node->next != NULL)
+    {
+        p_new_node->next = p_node->next;
+    }
+    p_node->next = p_new_node;
 }
 
 // Deletes node at index (counting from head starting from 0).
 // Note: index is guarenteed to be valid.
 void delete_node_at(list *lst, int index)
 {
+    if (lst->head == NULL)
+    {
+        return;
+    }
+
+    if (index == 0)
+    {
+        if (lst->head->next == NULL)
+        {
+            free(lst->head);
+            lst->head = NULL;
+            return;
+        }
+        lst->head = lst->head->next;
+        return;
+    }
+
+    int search_index = 1;
+    node *p_node = lst->head;
+    while (search_index < index)
+    {
+        p_node = p_node->next;
+        search_index++;
+    }
+
+    return;
 }
 
 // Search list by the given element.
