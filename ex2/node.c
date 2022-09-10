@@ -6,6 +6,7 @@
  *************************************/
 
 #include "stddef.h"
+#include "stdlib.h"
 #include "node.h"
 
 // Add in your implementation below to the respective functions
@@ -16,7 +17,7 @@
 // Note: index is guaranteed to be valid.
 void insert_node_at(list *lst, int index, int data)
 {
-    node *p_new_node = (node *)malloc(sizeof(node));
+    node *p_new_node = malloc(sizeof(node));
     p_new_node->data = data;
 
     if (lst->head == NULL)
