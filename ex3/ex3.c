@@ -105,7 +105,8 @@ void run_instruction(FILE *p_file, list *lst, int instr)
         list_len(lst);
         break;
     case MAP:
-        // func_list[0];
+        fscanf(p_file, "%d", &index);
+        map(lst, func_list[index]);
         break;
     }
 }
