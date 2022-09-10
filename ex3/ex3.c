@@ -2,7 +2,7 @@
  * Lab 1 Exercise 3
  * Name: Koh Zheng Qiang Shawn
  * Student No: A0185892L
- * Lab Group:
+ * Lab Group: 10
  *************************************/
 
 #include <stdio.h>
