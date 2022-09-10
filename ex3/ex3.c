@@ -79,7 +79,7 @@ void run_instruction(FILE *p_file, list *lst, int instr)
     {
     case SUM_LIST:
         long sum = sum_list(lst);
-        // printf("%d", sum);
+        printf("%d", sum);
         break;
     case INSERT_AT:
         fscanf(p_file, "%d %d", &index, &data);

@@ -19,6 +19,14 @@
 // of every node in the list.
 long sum_list(list *lst)
 {
+    long sum = 0;
+    node *p_node = lst->head;
+    while (p_node != NULL)
+    {
+        sum += p_node->data;
+        p_node = p_node->next;
+    }
+    return sum;
 }
 
 // Traverses list and returns the number of data values in the list.
