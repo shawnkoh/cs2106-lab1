@@ -141,4 +141,14 @@ void reverse_list(list *lst)
 // any allocated memory in the process
 void reset_list(list *lst)
 {
+    node *p_node = lst->head;
+    node *p_next;
+
+    while (p_node != NULL)
+    {
+        p_next = p_node->next;
+        free(p_node);
+        p_node = p_next;
+    }
+    lst->head = NULL;
 }
