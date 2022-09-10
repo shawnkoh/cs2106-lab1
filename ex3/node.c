@@ -186,4 +186,10 @@ void reset_list(list *lst)
 // all elements in the list.
 void map(list *lst, int (*func)(int))
 {
+    node *p_node = lst->head;
+    while (p_node != NULL)
+    {
+        p_node->data;
+        p_node = p_node->next;
+    }
 }
