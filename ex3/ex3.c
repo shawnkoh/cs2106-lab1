@@ -78,9 +78,11 @@ void run_instruction(FILE *p_file, list *lst, int instr)
     switch (instr)
     {
     case SUM_LIST:
+    {
         long sum = sum_list(lst);
-        printf("%d", sum);
+        printf("%ld", sum);
         break;
+    }
     case INSERT_AT:
         fscanf(p_file, "%d %d", &index, &data);
         insert_node_at(lst, index, data);
