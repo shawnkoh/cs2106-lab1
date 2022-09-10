@@ -27,6 +27,10 @@
 #define LIST_LEN 6
 #define MAP 7
 
+void run_instruction(FILE *p_file, list *lst, int instr);
+void print_list(list *lst);
+void print_index(int index);
+
 int main(int argc, char *argv[])
 {
     if (argc != 2)
@@ -44,9 +48,6 @@ int main(int argc, char *argv[])
 
     // Rest of code logic here
     FILE *p_file;
-    char *p_line = NULL;
-    size_t len = 0;
-    ssize_t read;
 
     p_file = fopen(argv[1], "r");
     if (p_file == NULL)
@@ -55,13 +56,13 @@ int main(int argc, char *argv[])
     list *p_list = (list *)malloc(sizeof(list));
     p_list->head = NULL;
 
-    while ((read = getline(&p_line, &len, p_file)) != -1)
+    int instr;
+    while (fscanf(p_file, "%d", &instr) == 1)
     {
-        printf("%s", p_line);
+        run_instruction(p_file, p_list, instr);
     }
 
     fclose(p_file);
-    free(p_line);
 
     reset_list(p_list);
     free(p_list);
@@ -71,21 +72,21 @@ int main(int argc, char *argv[])
 
 // Takes an instruction enum and runs the corresponding function
 // We assume input always has the right format (no input validation on runner)
-void run_instruction(list *lst, int instr)
+void run_instruction(FILE *p_file, list *lst, int instr)
 {
     int index, data, element;
     switch (instr)
     {
     case INSERT_AT:
-        scanf("%d %d", &index, &data);
+        fscanf(p_file, "%d %d", &index, &data);
         insert_node_at(lst, index, data);
         break;
     case DELETE_AT:
-        scanf("%d", &index);
+        fscanf(p_file, "%d", &index);
         delete_node_at(lst, index);
         break;
     case SEARCH_LIST:
-        scanf("%d", &element);
+        fscanf(p_file, "%d", &element);
         int ind = search_list(lst, element);
         print_index(ind);
         break;
@@ -95,4 +96,32 @@ void run_instruction(list *lst, int instr)
     case RESET_LIST:
         reset_list(lst);
     }
+}
+
+// Prints out the whole list in a single line
+void print_list(list *lst)
+{
+    if (lst->head == NULL)
+    {
+        printf("[ ]\n");
+        return;
+    }
+
+    printf("[ ");
+    node *curr = lst->head;
+    do
+    {
+        printf("%d ", curr->data);
+        curr = curr->next;
+    } while (curr != NULL);
+    printf("]\n");
+}
+
+// Print index
+void print_index(int index)
+{
+    if (index == -2)
+        printf("{}\n");
+    else
+        printf("{%d}\n", index);
 }
