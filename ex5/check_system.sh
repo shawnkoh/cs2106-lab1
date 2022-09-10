@@ -2,16 +2,16 @@
 
 ####################
 # Lab 1 Exercise 5
-# Name: 
-# Student No: 
-# Lab Group: 
+# Name: Koh Zheng Qiang Shawn
+# Student No: A0185892L
+# Lab Group: 10
 ####################
 
 # Fill the below up
-hostname=
+hostname=$(hostname)
 machine_hardware=
 max_user_process_count=
-user_process_count=
+user_process_count=$(ps -e | wc -l)
 user_with_most_processes=
 mem_free_percentage=
 
