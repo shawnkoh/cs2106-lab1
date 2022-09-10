@@ -123,6 +123,18 @@ int search_list(list *lst, int element)
 // Reverses the list with the last node becoming the first node.
 void reverse_list(list *lst)
 {
+    node *p_previous = NULL;
+    node *p_current = lst->head;
+    node *p_next = NULL;
+
+    while (p_current != NULL)
+    {
+        p_next = p_current->next;
+        p_current->next = p_previous;
+        p_previous = p_current;
+        p_current = p_next;
+    }
+    lst->head = p_previous;
 }
 
 // Resets list to an empty state (no nodes) and frees
