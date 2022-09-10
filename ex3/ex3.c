@@ -52,6 +52,9 @@ int main(int argc, char *argv[])
     if (p_file == NULL)
         exit(EXIT_FAILURE);
 
+    list *p_list = (list *)malloc(sizeof(list));
+    p_list->head = NULL;
+
     while ((read = getline(&p_line, &len, p_file)) != -1)
     {
         printf("%s", p_line);
@@ -60,33 +63,36 @@ int main(int argc, char *argv[])
     fclose(p_file);
     free(p_line);
 
+    reset_list(p_list);
+    free(p_list);
+
     exit(EXIT_SUCCESS);
 }
 
 // Takes an instruction enum and runs the corresponding function
 // We assume input always has the right format (no input validation on runner)
-// void run_instruction(list *lst, int instr)
-// {
-//     int index, data, element;
-//     switch (instr)
-//     {
-//     case INSERT_AT:
-//         scanf("%d %d", &index, &data);
-//         insert_node_at(lst, index, data);
-//         break;
-//     case DELETE_AT:
-//         scanf("%d", &index);
-//         delete_node_at(lst, index);
-//         break;
-//     case SEARCH_LIST:
-//         scanf("%d", &element);
-//         int ind = search_list(lst, element);
-//         print_index(ind);
-//         break;
-//     case REVERSE_LIST:
-//         reverse_list(lst);
-//         break;
-//     case RESET_LIST:
-//         reset_list(lst);
-//     }
-// }
+void run_instruction(list *lst, int instr)
+{
+    int index, data, element;
+    switch (instr)
+    {
+    case INSERT_AT:
+        scanf("%d %d", &index, &data);
+        insert_node_at(lst, index, data);
+        break;
+    case DELETE_AT:
+        scanf("%d", &index);
+        delete_node_at(lst, index);
+        break;
+    case SEARCH_LIST:
+        scanf("%d", &element);
+        int ind = search_list(lst, element);
+        print_index(ind);
+        break;
+    case REVERSE_LIST:
+        reverse_list(lst);
+        break;
+    case RESET_LIST:
+        reset_list(lst);
+    }
+}
