@@ -70,15 +70,6 @@ int main(int argc, char *argv[])
     exit(EXIT_SUCCESS);
 }
 
-#define SUM_LIST 0
-#define INSERT_AT 1
-#define DELETE_AT 2
-#define SEARCH_LIST 3
-#define REVERSE_LIST 4
-#define RESET_LIST 5
-#define LIST_LEN 6
-#define MAP 7
-
 // Takes an instruction enum and runs the corresponding function
 // We assume input always has the right format (no input validation on runner)
 void run_instruction(FILE *p_file, list *lst, int instr)
