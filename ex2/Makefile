@@ -3,3 +3,6 @@ all:
 
 clean:
 	rm -f *.o ex2
+
+test:
+	./ex2 < sample.in | diff -Z sample.out -
