@@ -77,7 +77,22 @@ void delete_node_at(list *lst, int index)
         search_index++;
     }
 
-    return;
+    if (p_node->next == NULL)
+    {
+        return;
+    }
+
+    node *p_node_to_delete = p_node->next;
+
+    if (p_node_to_delete->next == NULL)
+    {
+        p_node->next = NULL;
+        free(p_node_to_delete);
+        return;
+    }
+
+    p_node->next = p_node_to_delete->next;
+    free(p_node_to_delete);
 }
 
 // Search list by the given element.
