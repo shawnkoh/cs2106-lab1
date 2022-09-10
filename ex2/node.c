@@ -1,7 +1,7 @@
 /*************************************
  * Lab 1 Exercise 2
- * Name:
- * Student No:
+ * Name: Koh Zheng Qiang Shawn
+ * Student No: A0185892L
  * Lab Group:
  *************************************/
 
@@ -105,16 +105,19 @@ int search_list(list *lst, int element)
         return -2;
     }
 
-    if (lst->head->data == element)
-    {
-        return 0;
-    }
-
-    int index = 1;
+    int index = 0;
     node *p_node = lst->head;
-    while (p_node->data != element)
+
+    while (p_node->next != NULL)
     {
+        if (p_node->data == element)
+        {
+            return index;
+        }
+        index += 1;
+        p_node = p_node->next;
     }
+    return -1;
 }
 
 // Reverses the list with the last node becoming the first node.
