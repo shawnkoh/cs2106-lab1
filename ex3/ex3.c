@@ -70,6 +70,15 @@ int main(int argc, char *argv[])
     exit(EXIT_SUCCESS);
 }
 
+#define SUM_LIST 0
+#define INSERT_AT 1
+#define DELETE_AT 2
+#define SEARCH_LIST 3
+#define REVERSE_LIST 4
+#define RESET_LIST 5
+#define LIST_LEN 6
+#define MAP 7
+
 // Takes an instruction enum and runs the corresponding function
 // We assume input always has the right format (no input validation on runner)
 void run_instruction(FILE *p_file, list *lst, int instr)
@@ -77,6 +86,9 @@ void run_instruction(FILE *p_file, list *lst, int instr)
     int index, data, element;
     switch (instr)
     {
+    case SUM_LIST:
+        sum_list(lst);
+        break;
     case INSERT_AT:
         fscanf(p_file, "%d %d", &index, &data);
         insert_node_at(lst, index, data);
@@ -95,6 +107,12 @@ void run_instruction(FILE *p_file, list *lst, int instr)
         break;
     case RESET_LIST:
         reset_list(lst);
+    case LIST_LEN:
+        list_len(lst);
+        break;
+    case MAP:
+        // func_list[0];
+        break;
     }
 }
 
