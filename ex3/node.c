@@ -1,8 +1,8 @@
 /*************************************
  * Lab 1 Exercise 2
- * Name:
- * Student No:
- * Lab Group:
+ * Name: Koh Zheng Qiang Shawn
+ * Student No: A0185892L
+ * Lab Group: 10
  *************************************/
 
 #include "node.h"
