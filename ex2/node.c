@@ -100,6 +100,21 @@ void delete_node_at(list *lst, int index)
 // Printing of the index is already handled in ex2.c
 int search_list(list *lst, int element)
 {
+    if (lst->head == NULL)
+    {
+        return -2;
+    }
+
+    if (lst->head->data == element)
+    {
+        return 0;
+    }
+
+    int index = 1;
+    node *p_node = lst->head;
+    while (p_node->data != element)
+    {
+    }
 }
 
 // Reverses the list with the last node becoming the first node.
