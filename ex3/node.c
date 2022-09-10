@@ -189,7 +189,7 @@ void map(list *lst, int (*func)(int))
     node *p_node = lst->head;
     while (p_node != NULL)
     {
-        p_node->data;
+        p_node->data = (*func)(p_node->data);
         p_node = p_node->next;
     }
 }
